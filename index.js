@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {Bot, GrammyError, HttpError} = require('grammy');
+const {Bot, GrammyError, HttpError, Keyboard, InlineKeyboard} = require('grammy');
 
 const bot = new Bot(process.env.BOT_TOKEN);
 
@@ -10,11 +10,28 @@ bot.api.setMyCommands([
 ])
 
 bot.command('start', async (ctx) => {
-    await ctx.reply('Hi, i am a bot!')
+    const startKeyboard = new Keyboard().text("good").row().text("no").text("yes").resized().oneTime()
+    await ctx.reply('Hi, i am a bot!', {
+        reply_markup: startKeyboard,
+    })
+})
+
+bot.command('inline_keyboard', async (ctx) => {
+    const inlineKeyboard = new InlineKeyboard().text('1', 'button-1').text('2', 'button-2').text('3', 'button-3')
+
+    await ctx.reply('Select number!', {
+        reply_markup: inlineKeyboard,
+    })
 })
 
 bot.on(':media', async (ctx) => {
-    await ctx.reply("..")
+    await ctx.react('⚡')
+    await ctx.reply('asd')
+})
+
+bot.callbackQuery(/button/, async (ctx) => {
+    await ctx.reply(ctx.callbackQuery.data)
+    await ctx.answerCallbackQuery()
 })
 
 bot.catch((err) => {
