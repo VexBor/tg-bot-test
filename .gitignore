@@ -1,0 +1,37 @@
+# Залежності
+node_modules/
+yarn.lock         # (якщо юзаєш npm)
+
+.env
+.env.*
+*.pem
+*.key
+*.cert
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+dist/
+build/
+out/
+
+.npm/
+.eslintcache
+.cache/
+temp/
+tmp/
+
+.DS_Store
+Thumbs.db
+node-webkit/
+
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
